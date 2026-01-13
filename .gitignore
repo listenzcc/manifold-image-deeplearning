@@ -2,3 +2,6 @@ models
 my_video.mp4
 extracted_frames
 DesktopPictures
+video
+encoded.info
+encoded.npy

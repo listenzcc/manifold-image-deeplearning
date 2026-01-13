@@ -29,6 +29,7 @@ Functions:
 import torch
 import numpy as np
 from PIL import Image
+from tqdm.auto import tqdm
 from transformers import CLIPProcessor, CLIPModel
 
 # %% ---- 2026-01-12 ------------------------
@@ -147,20 +148,26 @@ def clip_manifold_video(image_dir):
 
     print("CLIP 编码...")
     zs = []
-    for f in files:
+    for f in tqdm(files, 'Encode images'):
         img = np.array(Image.open(f).convert("RGB"))
         zs.append(encoder.encode(img))
 
     print(np.array(zs).shape)
 
-    print("完成:", np.array(zs).shape)
+    encoded = np.array(zs)
+
+    print(f"完成: {encoded.shape=}")
+    np.save('encoded.npy', encoded)
+    with open('encoded.info', 'w') as f:
+        f.writelines([f'{p}\n' for p in files])
+        
 
 
 # %% ---- 2026-01-12 ------------------------
 # Play ground
 if __name__ == "__main__":
     clip_manifold_video(
-        image_dir="./DesktopPictures",
+        image_dir="./extracted_frames",
     )
 
 
