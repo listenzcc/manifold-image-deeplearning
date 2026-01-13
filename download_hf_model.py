@@ -22,20 +22,18 @@ import os
 from huggingface_hub import snapshot_download
 
 
-
 # %% ---- 2026-01-12 ------------------------
 # Function and class
 
 def download_hf_model_with_mirror(model_name):
     """使用镜像源下载VAE模型"""
-    
+
     # 设置环境变量使用镜像
     os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
-    
-    
+
     print("使用镜像源下载模型...")
     print(f"模型: {model_name}")
-    
+
     # 使用镜像
     snapshot_download(
         repo_id=model_name,
@@ -68,20 +66,20 @@ def manual_download_guide():
     print("   └── diffusion_pytorch_model.safetensors")
     print("\n完成后重新运行程序。")
 
+
 if __name__ == "__main__":
     # model_name = "stabilityai/sd-vae-ft-mse"
     # model_name = "openai/clip-vit-base-patch32"
     model_name = "runwayml/stable-diffusion-v1-5"
+    model_name = 'timm/vit_base_patch14_dinov2.lvd142m'
     download_hf_model_with_mirror(model_name)
 
 # %% ---- 2026-01-12 ------------------------
 # Play ground
 
 
-
 # %% ---- 2026-01-12 ------------------------
 # Pending
-
 
 
 # %% ---- 2026-01-12 ------------------------
